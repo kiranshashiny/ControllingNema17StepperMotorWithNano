@@ -4,6 +4,8 @@ This blog is about how to control the Stepper Motor ( In this case it is a Nema1
 
 The code is simple and so is the connections to the Motor.
 
+Driver  A4988
+
 ## Prerequisites :
 
 Arduino Nano -1
@@ -93,3 +95,81 @@ https://howtomechatronics.com/tutorials/arduino/how-to-control-stepper-motor-wit
 The pot on the A4988 can be adjusted to make the motor run smoother, or to reduce the jitters.
 
 It is better to source the 5V power supply to the Motor Driver from an external source than the Nano ! as it might burn the Nano.
+
+
+### Motor Driver  DRV8825
+
+![screen shot 2018-05-28 at 2 04 15 pm](https://user-images.githubusercontent.com/14288989/40605444-0c2c7bf2-6280-11e8-8fd7-093269c8e84b.png)
+
+
+![img_20180528_121058](https://user-images.githubusercontent.com/14288989/40605485-2ea608b0-6280-11e8-8647-1ad81ed2825a.jpg)
+
+
+This connections are
+
+Pin D3 is connected to Stepper pin.
+
+Pin D4 is connected to Direction Pin.  Change to High for Anticlockwise and LOW for Clockwise direction.
+The Enable Pin is untouched.
+The RESET and SLEEP are connected to each other.
+
+
+FIRST Code  - Pretty straight forward - will move the spindle only 1 direction
+This code cannot control the speed or direction.
+
+	int pin = 3;
+	int direction = 4;
+	
+	void setup(){
+	    pinMode(pin, OUTPUT);
+	    pinMode(direction, OUTPUT);
+	    //define direction, this doesn't really matter for the example but has to be done
+	    //digitalWrite(pin_1, LOW);
+	}
+	
+	void loop() {
+	    digitalWrite(pin, HIGH);
+	    // This is the fassest delay that can be used 
+	    delay(1);
+	    digitalWrite(pin, LOW);  
+	}
+	
+
+SECOND Code :
+Here we can control the direction and the speed of the motor.
+For simplicity - I have hardcoded the values to 1000 - where the motor moves at a small pace.
+400 us to 1000 us is what is the delay between the pulses.
+
+	
+	// Define your pins
+	const int stepPin = 3;
+	const int dirPin = 4; 
+	int customDelay,customDelayMapped; // Define variables
+	void setup() {
+	  pinMode(stepPin,OUTPUT);
+	  pinMode(dirPin,OUTPUT);
+	 
+	  digitalWrite(dirPin,LOW); //Enables the motor to move in a particular direction
+	}
+	void loop() {
+	  
+	  customDelayMapped = speedUp(); // Gets custom delay values from the custom speedUp function
+	  // Makes pules with custom delay, depending on the Potentiometer or analog input, from which the speed of the motor depends
+	  digitalWrite(stepPin, HIGH);
+	  delayMicroseconds(customDelayMapped);
+	  digitalWrite(stepPin, LOW);
+	  delayMicroseconds(customDelayMapped);
+	}
+	// Function for reading the Potentiometer
+	int speedUp() {
+	  //int customDelay = analogRead(A0); // Reads the potentiometer
+	  //int customDelay = 200; // Reads the potentiometer
+	  int newCustom = map(customDelay, 0, 1023, 400,3500); // Convrests the read values of the potentiometer from 0 to 1023 into desireded delay values (400 to 3500)
+	  newCustom=800;
+	  return newCustom;  
+	}
+
+
+Reference for DRV8825 : 
+https://www.youtube.com/watch?v=ZvXxVple1Ug
+https://drive.google.com/file/d/1om3-huTW1bRQQtRPeggwL5LCKXIMHb0r/view
