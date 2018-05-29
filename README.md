@@ -4,7 +4,7 @@ This blog is about how to control the Stepper Motor ( In this case it is a Nema1
 
 The code is simple and so is the connections to the Motor.
 
-Driver  A4988
+Both the drivers are described here. A4988 and DRV8825. (The latter is better as it can power upto 2A and can be used for powerful motors )
 
 ## Prerequisites :
 
@@ -77,7 +77,7 @@ https://howtomechatronics.com/tutorials/arduino/how-to-control-stepper-motor-wit
 
 
 
-A4988 Motor Driver
+## Motor Driver A4988
 
 ![screen shot 2018-05-23 at 12 08 44 pm](https://user-images.githubusercontent.com/14288989/40407437-137d08ce-5e82-11e8-8994-b049cae6347b.png)
 
@@ -97,7 +97,7 @@ The pot on the A4988 can be adjusted to make the motor run smoother, or to reduc
 It is better to source the 5V power supply to the Motor Driver from an external source than the Nano ! as it might burn the Nano.
 
 
-### Motor Driver  DRV8825
+## Motor Driver  DRV8825
 
 ![screen shot 2018-05-28 at 2 04 15 pm](https://user-images.githubusercontent.com/14288989/40605444-0c2c7bf2-6280-11e8-8fd7-093269c8e84b.png)
 
