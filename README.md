@@ -107,9 +107,9 @@ It is better to source the 5V power supply to the Motor Driver from an external 
 
 This connections are
 
-Pin D3 is connected to Stepper pin.
+Pin D3 is connected to Stepper pin. (Last but one on the left side )
 
-Pin D4 is connected to Direction Pin.  Change to High for Anticlockwise and LOW for Clockwise direction.
+Pin D4 is connected to Direction Pin. (Last pin on left rail). Change to High for Anticlockwise and LOW for Clockwise direction.
 The Enable Pin is untouched.
 The RESET and SLEEP are connected to each other.
 
